@@ -1,8 +1,10 @@
 import logging
+from functools import wraps
 
 
 logger = logging.getLogger(__name__)
 RETRIES_LIMIT = 3
+
 
 class ControlledException(Exception):
     None
@@ -29,9 +31,6 @@ class WithRetry:
                     logger.info(f"retrying {operation} due to {e}")
                     last_raised = e
                 raise last_raised
-
-                return last_raised
-
             return wrapped
 
 
